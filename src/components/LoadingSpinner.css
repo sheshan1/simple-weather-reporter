@@ -1,0 +1,48 @@
+/* LoadingSpinner Component Styles */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.loading-spinner__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner__rotating-icon {
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner__message {
+  margin: 0;
+  color: #74b9ff;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Size variations */
+.loading-spinner--small .loading-spinner__message {
+  font-size: 0.9rem;
+}
+
+.loading-spinner--large .loading-spinner__message {
+  font-size: 1.3rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
