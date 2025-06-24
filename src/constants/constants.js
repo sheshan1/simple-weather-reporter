@@ -5,7 +5,7 @@ export const APP_CONFIG = {
 };
 
 export const API_CONFIG = {
-  BASE_URL: 'http://api.weatherapi.com/v1',
+  BASE_URL: 'https://api.weatherapi.com/v1',
   ENDPOINTS: {
     CURRENT: '/current.json'
   },
