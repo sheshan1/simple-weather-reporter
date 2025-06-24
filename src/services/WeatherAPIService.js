@@ -76,7 +76,7 @@ class WeatherAPIService {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.error?.message || 
-        `HTTP ${response.status}: ${response.statusText}`
+        `HTTPS ${response.status}: ${response.statusText}`
       );
     }
     
