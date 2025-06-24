@@ -7,7 +7,8 @@ export const APP_CONFIG = {
 export const API_CONFIG = {
   BASE_URL: 'https://api.weatherapi.com/v1',
   ENDPOINTS: {
-    CURRENT: '/current.json'
+    CURRENT: '/current.json',
+    SEARCH: '/search.json'
   },
   DEFAULT_PARAMS: {
     aqi: 'no'

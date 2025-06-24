@@ -110,6 +110,27 @@ class WeatherAPIService {
       throw error;
     }
   }
+
+  /**
+   * Search for locations
+   * @param {string} query 
+   * @returns {Promise<Array>}
+   */
+  async searchLocations(query) {
+    if (!query || query.trim().length < 2) {
+      return [];
+    }
+
+    try {
+      const url = this._buildUrl(API_CONFIG.ENDPOINTS.SEARCH, { q: query.trim() });
+      const data = await this._makeRequest(url);
+      
+      return data || [];
+    } catch (error) {
+      console.error('Location Search Error:', error);
+      throw error;
+    }
+  }
 }
 
 // Export singleton instance

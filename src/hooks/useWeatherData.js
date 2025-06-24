@@ -6,18 +6,19 @@ import { retryWithBackoff } from '../utils/helpers';
 /**
  * Custom hook for managing weather data
  * Implements proper separation of concerns and state management
- * @param {string} location 
+ * @param {string} initialLocation 
  * @returns {object}
  */
-export const useWeatherData = (location = DEFAULT_LOCATION) => {
+export const useWeatherData = (initialLocation = DEFAULT_LOCATION) => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(initialLocation);
 
 
   // Fetch weather data with retry logic
-  const fetchWeatherData = useCallback(async (targetLocation = location) => {
+  const fetchWeatherData = useCallback(async (targetLocation = currentLocation) => {
     try {
       setLoading(true);
       setError(null);
@@ -36,11 +37,17 @@ export const useWeatherData = (location = DEFAULT_LOCATION) => {
     } finally {
       setLoading(false);
     }
-  }, [location]);
+  }, [currentLocation]);
 
   // Refresh weather data
   const refreshWeatherData = useCallback(() => {
     fetchWeatherData();
+  }, [fetchWeatherData]);
+
+  // Change location and fetch weather data
+  const changeLocation = useCallback((locationQuery) => {
+    setCurrentLocation(locationQuery);
+    fetchWeatherData(locationQuery);
   }, [fetchWeatherData]);
 
   // Initial data fetch
@@ -64,7 +71,9 @@ export const useWeatherData = (location = DEFAULT_LOCATION) => {
     loading,
     error,
     lastUpdated,
+    currentLocation,
     refreshWeatherData,
-    fetchWeatherData
+    fetchWeatherData,
+    changeLocation
   };
 };
