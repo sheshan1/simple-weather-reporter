@@ -6,6 +6,8 @@ import {
 
 import { 
   FiEye,                // Visibility icon
+  FiSearch,             // Search icon
+  FiX,                  // Close icon
 } from 'react-icons/fi';
 
 import { 
@@ -17,7 +19,8 @@ import {
 } from 'react-icons/ai';
 
 import { 
-  IoRefreshOutline      // Refresh icon
+  IoRefreshOutline,     // Refresh icon
+  IoLocationOutline     // Location icon
 } from 'react-icons/io5';
 
 /**
@@ -30,7 +33,10 @@ const WEATHER_ICONS = {
   visibility: FiEye,
   error: BiError,
   loading: AiOutlineLoading3Quarters,
-  refresh: IoRefreshOutline
+  refresh: IoRefreshOutline,
+  search: FiSearch,
+  close: FiX,
+  location: IoLocationOutline
 };
 
 /**

@@ -1,4 +1,4 @@
-import { WeatherCard, LoadingSpinner, ErrorDisplay } from './components';
+import { WeatherCard, LoadingSpinner, ErrorDisplay, SearchBar } from './components';
 import { useWeatherData } from './hooks/useWeatherData';
 import { APP_CONFIG } from './constants/constants';
 import './App.css';
@@ -8,16 +8,30 @@ function App() {
     weatherData, 
     loading, 
     error, 
-    refreshWeatherData 
+    currentLocation,
+    refreshWeatherData,
+    changeLocation
   } = useWeatherData();
+
+  // Handle location selection from search
+  const handleLocationSelect = (location) => {
+    // Create location query string that the API expects
+    const locationQuery = `${location.name}, ${location.country}`;
+    changeLocation(locationQuery);
+  };
 
   return (
     <div className="app">
       <div className="app__container">
         <header className="app__header">
           <h1 className="app__title">{APP_CONFIG.NAME}</h1>
-          <p className="app__subtitle">Current Weather in Colombo</p>
+          <p className="app__subtitle">
+            Current Weather in {weatherData?.location?.name || currentLocation}
+          </p>
         </header>
+
+        {/* Search Bar */}
+        <SearchBar onLocationSelect={handleLocationSelect} />
 
         <main className="app__main">
           {loading && (
