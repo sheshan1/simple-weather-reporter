@@ -31,30 +31,41 @@ function App() {
           </p>
         </header>
 
-        {/* Search Bar */}
-        <SearchBar onLocationSelect={handleLocationSelect} />
+        <div className="app__search-section">
+          <SearchBar onLocationSelect={handleLocationSelect} />
+        </div>
 
         <main className="app__main">
           {loading && (
-            <LoadingSpinner 
-              message="Fetching latest weather data..." 
-              size="large"
-            />
+            <div className="app__loading">
+              <LoadingSpinner 
+                message="Fetching latest weather data..." 
+                size="large"
+              />
+            </div>
           )}
 
           {error && (
-            <ErrorDisplay 
-              error={error}
-              onRetry={refreshWeatherData}
-            />
+            <div className="app__error">
+              <ErrorDisplay 
+                error={error}
+                onRetry={refreshWeatherData}
+              />
+            </div>
           )}
 
           {!loading && !error && weatherData && (
-            <>
-              <WeatherCard weatherData={weatherData} />
-              <DailyForecastSummary forecastData={forecastData} />
-              <HourlyForecastChart forecastData={forecastData} />
-            </>
+            <div className="app__weather-content">
+              <div className="app__weather-card">
+                <WeatherCard weatherData={weatherData} />
+              </div>
+              <div className="app__daily-forecast">
+                <DailyForecastSummary forecastData={forecastData} />
+              </div>
+              <div className="app__hourly-forecast">
+                <HourlyForecastChart forecastData={forecastData} />
+              </div>
+            </div>
           )}
         </main>
 
