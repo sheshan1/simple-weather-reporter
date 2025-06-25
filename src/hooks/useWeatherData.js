@@ -11,6 +11,7 @@ import { retryWithBackoff } from '../utils/helpers';
  */
 export const useWeatherData = (initialLocation = DEFAULT_LOCATION) => {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -23,13 +24,22 @@ export const useWeatherData = (initialLocation = DEFAULT_LOCATION) => {
       setLoading(true);
       setError(null);
 
-      const data = await retryWithBackoff(
-        () => WeatherAPIService.getCurrentWeather(targetLocation),
-        3,
-        1000
-      );
+      // Fetch both current weather and forecast data
+      const [currentData, forecastDataResponse] = await Promise.all([
+        retryWithBackoff(
+          () => WeatherAPIService.getCurrentWeather(targetLocation),
+          3,
+          1000
+        ),
+        retryWithBackoff(
+          () => WeatherAPIService.getForecast(targetLocation, 7),
+          3,
+          1000
+        )
+      ]);
 
-      setWeatherData(data);
+      setWeatherData(currentData);
+      setForecastData(forecastDataResponse);
       setLastUpdated(new Date());
     } catch (err) {
       setError(err.message || 'Failed to fetch weather data');
@@ -68,6 +78,7 @@ export const useWeatherData = (initialLocation = DEFAULT_LOCATION) => {
 
   return {
     weatherData,
+    forecastData,
     loading,
     error,
     lastUpdated,

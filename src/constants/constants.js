@@ -8,6 +8,7 @@ export const API_CONFIG = {
   BASE_URL: 'https://api.weatherapi.com/v1',
   ENDPOINTS: {
     CURRENT: '/current.json',
+    FORECAST: '/forecast.json',
     SEARCH: '/search.json'
   },
   DEFAULT_PARAMS: {
