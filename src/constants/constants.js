@@ -5,18 +5,19 @@ export const APP_CONFIG = {
 };
 
 export const API_CONFIG = {
-  BASE_URL: 'https://api.weatherapi.com/v1',
+  BASE_URL: '/api/weather',
   ENDPOINTS: {
-    CURRENT: '/current.json',
-    FORECAST: '/forecast.json',
-    SEARCH: '/search.json'
+    CURRENT: '?endpoint=current',
+    FORECAST: '?endpoint=forecast',
+    SEARCH: '?endpoint=search'
   },
   DEFAULT_PARAMS: {
     aqi: 'no'
   }
 };
 
-export const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+// API key is now handled securely on the server side
+export const API_KEY = null;
 
 export const DEFAULT_LOCATION = 'Colombo';
 

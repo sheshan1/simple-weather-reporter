@@ -1,8 +1,9 @@
-import { API_CONFIG, API_KEY } from '../constants/constants';
+import { API_CONFIG } from '../constants/constants';
 
 /**
  * Weather API Service Class
  * Implements Singleton pattern and follows OOP principles
+ * Now uses secure proxy endpoints instead of direct API calls
  */
 class WeatherAPIService {
   constructor() {
@@ -11,29 +12,27 @@ class WeatherAPIService {
     }
     
     this.baseUrl = API_CONFIG.BASE_URL;
-    this.apiKey = API_KEY;
     this.cache = new Map();
-    this.cacheTimeout = 1000; // 5 minutes
+    this.cacheTimeout = 300000; // 5 minutes
     
     WeatherAPIService.instance = this;
     return this;
   }
 
   /**
-   * Private method to build URL with parameters
+   * Private method to build URL with parameters for proxy endpoints
    * @param {string} endpoint 
    * @param {object} params 
    * @returns {string}
    */
   _buildUrl(endpoint, params = {}) {
-    const url = new URL(this.baseUrl + endpoint);
+    const url = new URL(this.baseUrl + endpoint, window.location.origin);
     
-    // Add API key
-    url.searchParams.append('key', this.apiKey);
-    
-    // Add other parameters
+    // Add parameters (API key is handled by the proxy)
     Object.entries({ ...API_CONFIG.DEFAULT_PARAMS, ...params }).forEach(([key, value]) => {
-      url.searchParams.append(key, value);
+      if (value !== undefined && value !== null) {
+        url.searchParams.append(key, value);
+      }
     });
     
     return url.toString();
