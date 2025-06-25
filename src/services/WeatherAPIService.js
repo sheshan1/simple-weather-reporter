@@ -112,6 +112,38 @@ class WeatherAPIService {
   }
 
   /**
+   * Get weather forecast for a location
+   * @param {string} location 
+   * @param {number} days Number of forecast days (1-14)
+   * @returns {Promise<object>}
+   */
+  async getForecast(location, days = 7) {
+    const cacheKey = `forecast_${location}_${days}`;
+    
+    // Check cache first
+    const cachedData = this._getFromCache(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
+    try {
+      const url = this._buildUrl(API_CONFIG.ENDPOINTS.FORECAST, { 
+        q: location, 
+        days: days 
+      });
+      const data = await this._makeRequest(url);
+      
+      // Cache the result
+      this._setCache(cacheKey, data);
+      
+      return data;
+    } catch (error) {
+      console.error('Weather Forecast API Error:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Search for locations
    * @param {string} query 
    * @returns {Promise<Array>}
@@ -134,4 +166,5 @@ class WeatherAPIService {
 }
 
 // Export singleton instance
-export default new WeatherAPIService();
+const weatherAPIService = new WeatherAPIService();
+export default weatherAPIService;

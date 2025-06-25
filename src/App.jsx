@@ -1,4 +1,4 @@
-import { WeatherCard, LoadingSpinner, ErrorDisplay, SearchBar } from './components';
+import { WeatherCard, LoadingSpinner, ErrorDisplay, SearchBar, HourlyForecastChart, DailyForecastSummary } from './components';
 import { useWeatherData } from './hooks/useWeatherData';
 import { APP_CONFIG } from './constants/constants';
 import './App.css';
@@ -6,6 +6,7 @@ import './App.css';
 function App() {
   const { 
     weatherData, 
+    forecastData,
     loading, 
     error, 
     currentLocation,
@@ -49,7 +50,11 @@ function App() {
           )}
 
           {!loading && !error && weatherData && (
-            <WeatherCard weatherData={weatherData} />
+            <>
+              <WeatherCard weatherData={weatherData} />
+              <DailyForecastSummary forecastData={forecastData} />
+              <HourlyForecastChart forecastData={forecastData} />
+            </>
           )}
         </main>
 

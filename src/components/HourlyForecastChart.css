@@ -1,0 +1,404 @@
+/* Hourly Forecast Chart - Clean Minimal Design */
+.hourly-forecast {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 1rem;
+  max-width: 100%;
+}
+
+/* Header Section */
+.hourly-forecast__header {
+  margin-bottom: 1rem;
+}
+
+.hourly-forecast__title {
+  color: #2d3436;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hourly-forecast__day-tabs {
+  display: flex;
+  background: rgba(116, 185, 255, 0.1);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.hourly-forecast__day-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #636e72;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.hourly-forecast__day-tab:hover {
+  background: rgba(116, 185, 255, 0.2);
+  color: #2d3436;
+}
+
+.hourly-forecast__day-tab--active {
+  background: #74b9ff;
+  color: white;
+  box-shadow: 0 2px 8px rgba(116, 185, 255, 0.3);
+}
+
+/* Main Scroll Container */
+.hourly-forecast__scroll-container {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(248, 249, 250, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.hourly-forecast__scroll-container:hover {
+  border-color: rgba(116, 185, 255, 0.3);
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.1);
+}
+
+.hourly-forecast__scroll-container:active {
+  cursor: grabbing;
+}
+
+/* Progress Indicator */
+.hourly-forecast__progress {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hourly-forecast__progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hourly-forecast__progress-fill {
+  height: 100%;
+  background: #74b9ff;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.hourly-forecast__progress-text {
+  color: #636e72;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Card Stack Container */
+.hourly-forecast__card-stack {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Card Positioning and Animation */
+.hourly-forecast__card {
+  position: absolute;
+  width: calc(100% - 40px);
+  max-width: 280px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.hourly-forecast__card--prev {
+  z-index: 1;
+  transform: translateY(-40px) scale(0.9) rotateX(10deg);
+  opacity: 0.5;
+  filter: blur(0.5px);
+}
+
+.hourly-forecast__card--current {
+  z-index: 2;
+  transform: translateY(0) scale(1) rotateX(0deg);
+  opacity: 1;
+}
+
+.hourly-forecast__card--next {
+  z-index: 1;
+  transform: translateY(40px) scale(0.9) rotateX(-10deg);
+  opacity: 0.5;
+  filter: blur(0.5px);
+}
+
+.hourly-forecast__card--animating {
+  transition-duration: 0.4s;
+}
+
+/* Hour Card Styling */
+.hour-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hour-card--main {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: rgba(116, 185, 255, 0.3);
+}
+
+.hour-card__time {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.hour-card__weather {
+  margin-bottom: 1rem;
+}
+
+.hour-card__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.hour-card__condition {
+  font-size: 0.85rem;
+  color: #636e72;
+  font-weight: 500;
+}
+
+.hour-card__temperature {
+  margin-bottom: 1rem;
+}
+
+.hour-card__temp-main {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #2d3436;
+  display: block;
+  line-height: 1;
+}
+
+.hour-card__temp-feels {
+  font-size: 0.8rem;
+  color: #636e72;
+  margin-top: 4px;
+  display: block;
+}
+
+.hour-card__details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hour-card__detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hour-card__detail span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.hour-card__precipitation {
+  text-align: center;
+  padding: 6px 10px;
+  background: rgba(0, 184, 148, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 184, 148, 0.2);
+  margin-top: 8px;
+}
+
+.hour-card__precip-amount {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #00b894;
+}
+
+/* Navigation Section */
+.hourly-forecast__navigation-arrows {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hourly-forecast__nav-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #74b9ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(116, 185, 255, 0.3);
+}
+
+.hourly-forecast__nav-button:hover:not(:disabled) {
+  background: #0984e3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(116, 185, 255, 0.4);
+}
+
+.hourly-forecast__nav-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(116, 185, 255, 0.2);
+}
+
+.hourly-forecast__nav-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Empty State */
+.hourly-forecast__empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #636e72;
+  font-size: 0.9rem;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hourly-forecast {
+    padding: 0.75rem;
+  }
+
+  .hourly-forecast__scroll-container {
+    height: 320px;
+  }
+
+  .hour-card {
+    padding: 1.25rem;
+  }
+
+  .hour-card__temp-main {
+    font-size: 2rem;
+  }
+
+  .hour-card__icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hourly-forecast__day-tabs {
+    gap: 1px;
+  }
+
+  .hourly-forecast__day-tab {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .hour-card__details {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hourly-forecast__scroll-container {
+    height: 300px;
+  }
+
+  .hour-card {
+    padding: 1rem;
+  }
+
+  .hour-card__temp-main {
+    font-size: 1.8rem;
+  }
+
+  .hour-card__details {
+    gap: 4px;
+  }
+
+  .hour-card__detail {
+    padding: 6px;
+  }
+
+  .hourly-forecast__nav-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hourly-forecast__navigation-arrows {
+    right: 8px;
+    gap: 6px;
+  }
+
+  /* Improved 7-day tab layout for small screens */
+  .hourly-forecast__day-tab {
+    padding: 0.35rem 0.25rem;
+    font-size: 0.7rem;
+    min-width: 0; /* Allow tabs to shrink below their content width if needed */
+  }
+}
+
+/* Additional responsive handling for very small screens */
+@media (max-width: 360px) {
+  .hourly-forecast__day-tab {
+    padding: 0.3rem 0.2rem;
+    font-size: 0.65rem;
+    font-weight: 600; /* Increase weight to maintain readability with smaller font */
+  }
+}

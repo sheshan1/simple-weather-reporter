@@ -2,12 +2,17 @@ import {
   WiHumidity,           // Humidity icon
   WiStrongWind,         // Wind icon  
   WiDaySunny,           // UV/Sun icon
+  WiRain,               // Rain icon
+  WiBarometer,          // Pressure icon
 } from 'react-icons/wi';
 
 import { 
   FiEye,                // Visibility icon
   FiSearch,             // Search icon
   FiX,                  // Close icon
+  FiTrendingUp,         // Forecast icon
+  FiChevronUp,          // Up arrow icon
+  FiChevronDown,        // Down arrow icon
 } from 'react-icons/fi';
 
 import { 
@@ -23,6 +28,10 @@ import {
   IoLocationOutline     // Location icon
 } from 'react-icons/io5';
 
+import { 
+  MdOutlineSwipeVertical, // Scroll icon
+} from 'react-icons/md';
+
 /**
  * Weather Icon Mapping
  */
@@ -36,7 +45,13 @@ const WEATHER_ICONS = {
   refresh: IoRefreshOutline,
   search: FiSearch,
   close: FiX,
-  location: IoLocationOutline
+  location: IoLocationOutline,
+  rain: WiRain,
+  pressure: WiBarometer,
+  forecast: FiTrendingUp,
+  scroll: MdOutlineSwipeVertical,
+  up: FiChevronUp,
+  down: FiChevronDown
 };
 
 /**

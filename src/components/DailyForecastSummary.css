@@ -1,0 +1,141 @@
+/* DailyForecastSummary Component - Google Weather Style */
+.daily-forecast-summary {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 1rem;
+  max-width: 100%;
+}
+
+.daily-forecast-summary__title {
+  margin: 0 0 1rem 0;
+  color: #2d3436;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.daily-forecast-summary__days {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Day Card */
+.day-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.day-card:hover {
+  background: rgba(116, 185, 255, 0.05);
+  border-color: rgba(116, 185, 255, 0.2);
+}
+
+.day-card--today {
+  background: rgba(116, 185, 255, 0.08);
+  border-color: rgba(116, 185, 255, 0.3);
+}
+
+.day-card__day {
+  font-weight: 600;
+  color: #2d3436;
+  min-width: 80px;
+  font-size: 0.9rem;
+}
+
+.day-card--today .day-card__day {
+  color: #74b9ff;
+}
+
+.day-card__weather {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.day-card__icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.day-card__temps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.day-card__high {
+  font-weight: 600;
+  color: #2d3436;
+  font-size: 0.9rem;
+}
+
+.day-card__low {
+  color: #636e72;
+  font-size: 0.9rem;
+}
+
+.day-card__rain {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #4A90E2;
+  min-width: 50px;
+  justify-content: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .daily-forecast-summary {
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .daily-forecast-summary__title {
+    font-size: 1rem;
+  }
+
+  .day-card {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .day-card__day {
+    min-width: 70px;
+    font-size: 0.85rem;
+  }
+
+  .day-card__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .day-card__temps {
+    gap: 0.25rem;
+  }
+
+  .day-card__high,
+  .day-card__low {
+    font-size: 0.85rem;
+  }
+
+  .day-card__rain {
+    font-size: 0.75rem;
+    min-width: 45px;
+  }
+}
