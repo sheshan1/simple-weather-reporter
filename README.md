@@ -236,7 +236,7 @@ This project uses a **secure two-branch deployment strategy**:
 
 - **Development Branch**: `development` - Main development work, no sensitive data
 - **Deployment Branch**: `deployment` - **THIS BRANCH** - Contains production configuration and API keys
-- **Live Production**: **Currently deployed from this branch** ➜ [View Live App](https://simple-weather-reporter-n32wyv15z-sheshans-projects-420d47d2.vercel.app/)
+- **Live Production**: **Currently deployed from this branch** ➜ [View Live App](https://simple-weather-reporter.vercel.app/)
 
 ### 🚀 Current Deployment Status
 
